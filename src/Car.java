@@ -20,14 +20,6 @@ public class Car extends Vehicle {
         discountApplied = newDiscountApplied;
     }
 
-    public void printCar() {
-        System.out.println("License plate: " + getLicensePlate() +
-                "\nToll fee: " + getTollFee() +
-                "\nPassengers: " + getPassengers() +
-                "\nElectric? " + electric +
-                "\nDiscount applied? " + discountApplied);
-    }
-
     public boolean dropOffPassengers(int numOut) {
         if (numOut < getPassengers()) {
             setPassengers(getPassengers() - numOut);
@@ -41,5 +33,20 @@ public class Car extends Vehicle {
             setTollFee(getTollFee() * .5);
             discountApplied = true;
         }
+    }
+
+    @Override
+    public double calculateTollPrice() {
+        if (getPassengers() > 4) {
+            return getTollFee() * 4;
+        }
+        return super.calculateTollPrice();
+    }
+
+    @Override
+    public void printInfo() {
+        super.printInfo();
+        System.out.println("Electric? " + electric +
+                "\nDiscount applied? " + discountApplied);
     }
 }
